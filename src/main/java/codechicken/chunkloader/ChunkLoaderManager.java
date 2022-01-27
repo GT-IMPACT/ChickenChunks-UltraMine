@@ -1,6 +1,7 @@
 package codechicken.chunkloader;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
 
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.PlayerManager.PlayerInstance;
 import net.minecraft.world.chunk.Chunk;
@@ -736,8 +738,13 @@ public class ChunkLoaderManager
                 if (instance == null) {
                     world.theChunkProviderServer.unloadChunksIfNotNearSpawn(coord.chunkXPos, coord.chunkZPos);
                 } else {
-                    while (instance.playersWatchingChunk.size() > 0)
-                        instance.removePlayer((EntityPlayerMP) instance.playersWatchingChunk.get(0));
+                    try {
+                        List<?> playersWatchingChunk = ReflectionHelper.getPrivateValue(PlayerInstance.class, instance, "playersWatchingChunk");
+                        while (playersWatchingChunk.size() > 0)
+                            instance.removePlayer((EntityPlayerMP) playersWatchingChunk.get(0));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
