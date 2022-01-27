@@ -1,0 +1,13 @@
+// Add any additional repositories for your dependencies here
+
+repositories {
+    maven {
+        url = "https://jitpack.io"
+    }
+    maven {
+        name 'ultramine'
+        url 'http://maven.ultramine.ru/'
+    }
+    maven { url 'http://repo.mikeprimm.com/' }
+    maven { url = "http://maven.cil.li/" }
+}
