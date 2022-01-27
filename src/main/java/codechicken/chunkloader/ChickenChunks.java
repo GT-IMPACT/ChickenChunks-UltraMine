@@ -12,7 +12,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = "ChickenChunks", dependencies = "required-after:CodeChickenCore@[" + CodeChickenCorePlugin.version + ",)", acceptedMinecraftVersions = CodeChickenCorePlugin.mcVersion)
+@Mod(modid = "ChickenChunks", dependencies = "required-after:CodeChickenCore;", acceptedMinecraftVersions = CodeChickenCorePlugin.mcVersion)
 public class ChickenChunks
 {
     @SidedProxy(clientSide = "codechicken.chunkloader.ChunkLoaderClientProxy", serverSide = "codechicken.chunkloader.ChunkLoaderProxy")
